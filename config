@@ -1,0 +1,8 @@
+#!/bin/bash
+
+./configure --with-cuda=/usr/local/cuda4/cuda \
+	    --with-cuda-sdk=/usr/local/cuda4/computingSDK \
+	    --with-compiler-dir=/opt/gcc/4.4.6/bin \
+	    --with-magma-dir=/usr/local/src/magma_1.0.0 \
+	    --with-mumps-dir=/kylo/programy/CAD/MUMPS_4.9.2 \
+            --with-single-precision=no

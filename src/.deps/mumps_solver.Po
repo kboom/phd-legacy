@@ -1,0 +1,12 @@
+mumps_solver.o: mumps_solver.cc ../include/mumps_solver.h \
+ /kylo/programy/CAD/MUMPS_4.9.2/include/dmumps_c.h \
+ /kylo/programy/CAD/MUMPS_4.9.2/include/mumps_compat.h \
+ /kylo/programy/CAD/MUMPS_4.9.2/include/mumps_c_types.h
+
+../include/mumps_solver.h:
+
+/kylo/programy/CAD/MUMPS_4.9.2/include/dmumps_c.h:
+
+/kylo/programy/CAD/MUMPS_4.9.2/include/mumps_compat.h:
+
+/kylo/programy/CAD/MUMPS_4.9.2/include/mumps_c_types.h:

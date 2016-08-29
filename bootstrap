@@ -1,0 +1,22 @@
+#!/bin/bash
+
+if [ -d m4 ]; then
+    echo "./m4 already exists"
+else
+    echo -n "Creating ./m4 directory... "
+    mkdir m4
+    if [ $? -ne 0 ]; then
+        echo "FAIL"
+        exit 1
+    else
+        echo "OK"
+    fi
+fi
+
+autoreconf -i
+
+if [ $? -ne 0 ]; then
+    echo "+ bootstrap FAIL"
+else
+    echo "+ bootstrap DONE"
+fi
