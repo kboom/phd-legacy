@@ -69,6 +69,20 @@ mumps_LIBS="-L${MUMPS_DIR}/lib -L${MUMPS_DIR}/libseq -ldmumps -lmpiseq -lmumps_c
 AC_SUBST(mumps_CPPFLAGS)
 AC_SUBST(mumps_LIBS)
 
+
+USER_LIB="~/usr"
+AC_ARG_WITH([user-lib],
+   [AS_HELP_STRING(
+        [--with-user-lib=PATH],
+        [include local include directory @<:@default=auto@:>@])],
+   [USER_LIB=$withval],
+   [with_user_lib=auto])
+user_CPPFLAGS="-I${USER_LIB}/include"
+user_LIBS="-I${USER_LIB}/lib"
+AC_SUBST(user_CPPFLAGS)
+AC_SUBST(user_LIBS)
+
+
 AC_ARG_WITH([single-precision],
    [AS_HELP_STRING([--with-single-precision],
                    [Use single precision instead of double])])

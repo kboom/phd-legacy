@@ -1,12 +1,12 @@
 #include <config.h>
-#include <cutil_inline.h>
+#include <cuda_runtime.h>
+#include <device_launch_parameters.h>
 #include <float.h>
 #include <iostream>
 #include <fstream>
 #include <sstream>
 #include <cmath>
 #include <boost/format.hpp>
-#include <CUDA_interface.h>
 #include <device/utils.cuh>
 #include <device/base_functions.cuh>
 #include <device/matrix_utils.cuh>
