@@ -1,0 +1,8 @@
+#!/bin/bash
+
+./configure --with-user-lib=/home/gurgula/usr/local \
+	    --with-cuda=/usr/local/cuda \
+	    --with-cuda-sdk=/usr/local/cuda \
+	    --with-magma-dir=/home/gurgula/libs/magma-2.0.2 \
+	    --with-mumps-dir=/home/gurgula/libs/MUMPS_5.0.2  \
+            --with-single-precision=no

@@ -22,6 +22,17 @@
 // this must not be greater than maximal threads per block
 #define MAX_SHARED_ROW 1024
 
+#define gpuAssert(ans) { gpuAssertCheck((ans), __FILE__, __LINE__); }
+inline void gpuAssertCheck(cudaError_t code, const char *file, int line, bool abort=true)
+{
+   if (code != cudaSuccess)
+   {
+	  const char* msg = cudaGetErrorString(code);
+      fprintf(stderr,"GPUassert: %s %s %d\n", msg, file, line);
+      if (abort) exit(code);
+   }
+}
+
 __constant__ FEM_PRECISION points[QPC] = {-0.861136311594052,
     -0.339981043584856,
     0.339981043584856,
@@ -1276,8 +1287,8 @@ print_local_matrices_and_rhs_h(int n, int step)
     bb = new T[size];
     T *bb_i = bb;
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(bb, tmp, sizeof (T) * size, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(bb, tmp, sizeof (T) * size, cudaMemcpyDeviceToHost));
 
     int cols = row_length<_H, degree>::f(step);
     int e_cnt = eliminated<_H, degree>::f(step);
@@ -1320,8 +1331,8 @@ print_local_matrices_and_rhs_v(int n, int step)
     bb = new T[size];
     T *bb_i = bb;
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bv, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(bb, tmp, sizeof (T) * size, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bv, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(bb, tmp, sizeof (T) * size, cudaMemcpyDeviceToHost));
 
     int cols = row_length<_V, degree>::f(step);
     int e_cnt = eliminated<_V, degree>::f(step);
@@ -1355,14 +1366,14 @@ void
 print_assembled_h(int n, int step)
 {
     void* assembled[MAX_MERGES];
-    cutilSafeCall(cudaMemcpyFromSymbol(assembled, d_assembled, sizeof (assembled)));
+    gpuAssert(cudaMemcpyFromSymbol(assembled, d_assembled, sizeof (assembled)));
 
 
     int m = mgrid_width<degree>(n);
     int size = assembled_size<_H, degree>(m, step);
     T *tmp = new T[size];
 
-    cutilSafeCall(cudaMemcpy(tmp, assembled[2 * step + 1],
+    gpuAssert(cudaMemcpy(tmp, assembled[2 * step + 1],
                              sizeof (T) * size, cudaMemcpyDeviceToHost));
 
     int w = row_length<_H, degree>::f(step) + 1;
@@ -1384,7 +1395,7 @@ void
 print_assembled_v(int n, int step)
 {
     void* assembled[MAX_MERGES];
-    cutilSafeCall(cudaMemcpyFromSymbol(assembled, d_assembled, sizeof (assembled)));
+    gpuAssert(cudaMemcpyFromSymbol(assembled, d_assembled, sizeof (assembled)));
 
     T *tmp;
 
@@ -1393,7 +1404,7 @@ print_assembled_v(int n, int step)
 
     tmp = new T[size];
 
-    cutilSafeCall(cudaMemcpy(tmp, assembled[2 * step + 2],
+    gpuAssert(cudaMemcpy(tmp, assembled[2 * step + 2],
                              sizeof (T) * size, cudaMemcpyDeviceToHost));
 
     int w = row_length<_V, degree>::f(step) + 1;
@@ -1419,7 +1430,7 @@ void
 print_assembled_0(int n)
 {
     void* assembled[MAX_MERGES];
-    cutilSafeCall(cudaMemcpyFromSymbol(assembled, d_assembled, sizeof (assembled)));
+    gpuAssert(cudaMemcpyFromSymbol(assembled, d_assembled, sizeof (assembled)));
 
     T *tmp;
 
@@ -1427,7 +1438,7 @@ print_assembled_0(int n)
 
     tmp = new T[size];
 
-    cutilSafeCall(cudaMemcpy(tmp, assembled[0],
+    gpuAssert(cudaMemcpy(tmp, assembled[0],
                              sizeof (T) * size, cudaMemcpyDeviceToHost));
 
     int w = (2*degree+1)*(2*degree+1) + 1;
@@ -1653,8 +1664,8 @@ print_local_matrices_and_rhs_after_first_merge(int n)
 
     bb = new T[size_bb];
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bv, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(bb, tmp, sizeof (T) * size_bb, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bv, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(bb, tmp, sizeof (T) * size_bb, cudaMemcpyDeviceToHost));
 
 //    const int sizeM = (2*degree + 1) * (2*degree + 1) - 1;
 
@@ -1686,11 +1697,11 @@ print_whole_matrix_and_rhs_assembled(int n)
     bb = new T[size_bb];
     ll = new T[size_ll];
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(bb, tmp, sizeof (T) * size_bb, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(bb, tmp, sizeof (T) * size_bb, cudaMemcpyDeviceToHost));
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Lh, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(ll, tmp, sizeof (T) * size_ll, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Lh, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(ll, tmp, sizeof (T) * size_ll, cudaMemcpyDeviceToHost));
 
     int B_size = (n + degree) * (n + degree);
     int L_size = (n + degree) * (n + degree);
@@ -1753,11 +1764,11 @@ print_local_matrices(int n)
     bb = new T[size_bb];
     ll = new T[size_ll];
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(bb, tmp, sizeof (T) * size_bb, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(bb, tmp, sizeof (T) * size_bb, cudaMemcpyDeviceToHost));
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Lh, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(ll, tmp, sizeof (T) * size_ll, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Lh, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(ll, tmp, sizeof (T) * size_ll, cudaMemcpyDeviceToHost));
 
     int dim = (degree + 1) * (degree + 1);
 
@@ -1791,8 +1802,8 @@ debug_device(int n)
 //
 //    T *tmp, *bb = new T[size];
 //
-//    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
-//    cutilSafeCall(cudaMemcpy(bb, tmp, sizeof (T) * size, cudaMemcpyDeviceToHost));
+//    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
+//    gpuAssert(cudaMemcpy(bb, tmp, sizeof (T) * size, cudaMemcpyDeviceToHost));
 //
 //    size = 64;
 //    for(int i=0 ; i<size ; ++i)
@@ -1845,24 +1856,24 @@ allocate_memory_for_assembled_rows(int m)
      */
     int steps = steps_count(m);
 
-    cutilSafeCall(cudaMalloc(&tmp_p[0], sizeof (T) * m * m / 4 * (pow<int>(2 * degree + 1, 2)+1)));
+    gpuAssert(cudaMalloc(&tmp_p[0], sizeof (T) * m * m / 4 * (pow<int>(2 * degree + 1, 2)+1)));
     for (int i = 0; i < steps; ++i)
     {
-        cutilSafeCall(cudaMalloc(&tmp_p[2 * i + 1],
+        gpuAssert(cudaMalloc(&tmp_p[2 * i + 1],
                                  sizeof (T) * assembled_size<_H, degree>(m, i)));
-        cutilSafeCall(cudaMalloc(&tmp_p[2 * i + 2],
+        gpuAssert(cudaMalloc(&tmp_p[2 * i + 2],
                                  sizeof (T) * assembled_size<_V, degree>(m, i)));
     }
-    cutilSafeCall(cudaMemcpyToSymbol(d_assembled, tmp_p, sizeof (tmp_p)));
+    gpuAssert(cudaMemcpyToSymbol(d_assembled, tmp_p, sizeof (tmp_p)));
 }
 
 void
 free_memory_for_assembled_rows()
 {
     void* tmp_p[MAX_MERGES];
-    cutilSafeCall(cudaMemcpyFromSymbol(tmp_p, d_assembled, sizeof (tmp_p)));
+    gpuAssert(cudaMemcpyFromSymbol(tmp_p, d_assembled, sizeof (tmp_p)));
     for (int i = 0; i < MAX_MERGES; ++i)
-        if (tmp_p[i]) cutilSafeCall(cudaFree(tmp_p[i]));
+        if (tmp_p[i]) gpuAssert(cudaFree(tmp_p[i]));
 }
 
 /**
@@ -1879,10 +1890,10 @@ prepare_device(int n)
         t[i] = t_gen<T>(i, n, degree);
 
     // Allocate knot vector
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * knots_cnt<degree>(n)));
-    cutilSafeCall(cudaMemcpy(tmp, t, sizeof (T) * knots_cnt<degree>(n),
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * knots_cnt<degree>(n)));
+    gpuAssert(cudaMemcpy(tmp, t, sizeof (T) * knots_cnt<degree>(n),
                              cudaMemcpyHostToDevice));
-    cutilSafeCall(cudaMemcpyToSymbol(d_knot_vector, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMemcpyToSymbol(d_knot_vector, &tmp, sizeof (tmp)));
     delete[] t;
 
     int m = mgrid_width<degree>(n);
@@ -1891,24 +1902,24 @@ prepare_device(int n)
     int max_wh = 5 * m / 2 * (degree * degree + degree) - degree * degree;
 
     int size = max_wh * (max_wh + 1);
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * size));
-    cutilSafeCall(cudaMemcpyToSymbol(d_Bv, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * size));
+    gpuAssert(cudaMemcpyToSymbol(d_Bv, &tmp, sizeof (tmp)));
 
     // Allocate space for horizontal merging
     max_wh = 7 * m / 4 * (degree * degree + degree) - degree * degree;
 
     int initial_size = n * n * (degree + 1) * (degree + 1) * (degree + 1) * (degree + 1);
     size = std::max(2 * max_wh * (max_wh + 1), initial_size);
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * size));
-    cutilSafeCall(cudaMemcpyToSymbol(d_Bh, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * size));
+    gpuAssert(cudaMemcpyToSymbol(d_Bh, &tmp, sizeof (tmp)));
 
     // Allocate fronts (L part)
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * n * n * (degree + 1) * (degree + 1)));
-    cutilSafeCall(cudaMemcpyToSymbol(d_Lh, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * n * n * (degree + 1) * (degree + 1)));
+    gpuAssert(cudaMemcpyToSymbol(d_Lh, &tmp, sizeof (tmp)));
 
     // Allocate fronts (L part) for horizontal merge
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * n * n * (degree + 1) * (degree + 1)));
-    cutilSafeCall(cudaMemcpyToSymbol(d_Lv, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * n * n * (degree + 1) * (degree + 1)));
+    gpuAssert(cudaMemcpyToSymbol(d_Lv, &tmp, sizeof (tmp)));
 
     allocate_memory_for_assembled_rows<T, degree>(m);
 
@@ -1916,27 +1927,27 @@ prepare_device(int n)
     T * dev_ptrs[2];
 
     // functions
-    cutilSafeCall(cudaMalloc(&dev_ptrs[0], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
-    cutilSafeCall(cudaMalloc(&dev_ptrs[1], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
-    cutilSafeCall(cudaMemcpyToSymbol(d_Nvals, dev_ptrs, sizeof (dev_ptrs)));
+    gpuAssert(cudaMalloc(&dev_ptrs[0], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
+    gpuAssert(cudaMalloc(&dev_ptrs[1], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
+    gpuAssert(cudaMemcpyToSymbol(d_Nvals, dev_ptrs, sizeof (dev_ptrs)));
 
     // derivatives
-    cutilSafeCall(cudaMalloc(&dev_ptrs[0], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
-    cutilSafeCall(cudaMalloc(&dev_ptrs[1], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
-    cutilSafeCall(cudaMemcpyToSymbol(d_dNvals, dev_ptrs, sizeof (dev_ptrs)));
+    gpuAssert(cudaMalloc(&dev_ptrs[0], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
+    gpuAssert(cudaMalloc(&dev_ptrs[1], sizeof (T) * base_funs_cnt<degree>(n) * (degree + 1) * QPC));
+    gpuAssert(cudaMemcpyToSymbol(d_dNvals, dev_ptrs, sizeof (dev_ptrs)));
 
     // Allocate space for result
     size = pow<int>(QPC, 2) * pow<int>(n, 2);
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * size));
-    cutilSafeCall(cudaMemset(tmp, 0, sizeof (T) * size));
-    cutilSafeCall(cudaMemcpyToSymbol(d_fun_vals, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * size));
+    gpuAssert(cudaMemset(tmp, 0, sizeof (T) * size));
+    gpuAssert(cudaMemcpyToSymbol(d_fun_vals, &tmp, sizeof (tmp)));
 
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * size));
-    cutilSafeCall(cudaMemset(tmp, 0, sizeof (T) * size));
-    cutilSafeCall(cudaMemcpyToSymbol(d_der_vals, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * size));
+    gpuAssert(cudaMemset(tmp, 0, sizeof (T) * size));
+    gpuAssert(cudaMemcpyToSymbol(d_der_vals, &tmp, sizeof (tmp)));
 
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (p_2D<T>) * size));
-    cutilSafeCall(cudaMemcpyToSymbol(d_coords, &tmp, sizeof (tmp)));
+    gpuAssert(cudaMalloc(&tmp, sizeof (p_2D<T>) * size));
+    gpuAssert(cudaMemcpyToSymbol(d_coords, &tmp, sizeof (tmp)));
 
     cudaThreadSynchronize();
 }
@@ -1965,40 +1976,40 @@ cleanup_device()
 {
     void *tmp;
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Lh, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Lv, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Lh, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Lv, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_Bv, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bh, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_Bv, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
 
     free_memory_for_assembled_rows();
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_knot_vector, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_knot_vector, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
 
     // Free matrices for accumulative base function evaluation
     void *dev_ptrs[2];
     // functions
-    cutilSafeCall(cudaMemcpyFromSymbol(dev_ptrs, d_Nvals, sizeof (dev_ptrs)));
-    cutilSafeCall(cudaFree(dev_ptrs[0]));
-    cutilSafeCall(cudaFree(dev_ptrs[1]));
+    gpuAssert(cudaMemcpyFromSymbol(dev_ptrs, d_Nvals, sizeof (dev_ptrs)));
+    gpuAssert(cudaFree(dev_ptrs[0]));
+    gpuAssert(cudaFree(dev_ptrs[1]));
 
     // derivatives
-    cutilSafeCall(cudaMemcpyFromSymbol(dev_ptrs, d_dNvals, sizeof (dev_ptrs)));
-    cutilSafeCall(cudaFree(dev_ptrs[0]));
-    cutilSafeCall(cudaFree(dev_ptrs[1]));
+    gpuAssert(cudaMemcpyFromSymbol(dev_ptrs, d_dNvals, sizeof (dev_ptrs)));
+    gpuAssert(cudaFree(dev_ptrs[0]));
+    gpuAssert(cudaFree(dev_ptrs[1]));
 
     // Free result memory
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_fun_vals, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_der_vals, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_coords, sizeof (tmp)));
-    cutilSafeCall(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_fun_vals, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_der_vals, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_coords, sizeof (tmp)));
+    gpuAssert(cudaFree(tmp));
 }
 
 /**
@@ -2140,8 +2151,8 @@ solve_magma<double>(int r_cnt, int pad)
     typedef double T;
     int info, ldda, lddb, *ipiv;
     T *mat, *rhs;
-    cutilSafeCall(cudaMemcpyFromSymbol(&mat, d_Bv, sizeof (T*)));
-    cutilSafeCall(cudaMemcpyFromSymbol(&rhs, d_fun_vals, sizeof (T*)));
+    gpuAssert(cudaMemcpyFromSymbol(&mat, d_Bv, sizeof (T*)));
+    gpuAssert(cudaMemcpyFromSymbol(&rhs, d_fun_vals, sizeof (T*)));
     ldda = r_cnt + pad + 1;
     lddb = r_cnt;
     mat += pad;
@@ -2171,7 +2182,7 @@ solve_magma<float>(int r_cnt, int pad)
     typedef float T;
     int info, ldda, lddb, *ipiv;
     T *mat, *rhs;
-    cutilSafeCall(cudaMemcpyFromSymbol(&mat, d_Bv, sizeof (T*)));
+    gpuAssert(cudaMemcpyFromSymbol(&mat, d_Bv, sizeof (T*)));
     ldda = r_cnt + pad + 1;
     lddb = r_cnt;
     rhs = mat + r_cnt * ldda;
@@ -2389,11 +2400,11 @@ print_result(int n, std::ostream &ostr)
     T *tmp_v;
     T *val = new T[size];
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp, d_coords, sizeof (tmp)));
-    cutilSafeCall(cudaMemcpy(p, tmp, sizeof(p_2D<T>) * size, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp, d_coords, sizeof (tmp)));
+    gpuAssert(cudaMemcpy(p, tmp, sizeof(p_2D<T>) * size, cudaMemcpyDeviceToHost));
 
-    cutilSafeCall(cudaMemcpyFromSymbol(&tmp_v, d_fun_vals, sizeof (tmp_v)));
-    cutilSafeCall(cudaMemcpy(val, tmp_v, sizeof(T) * size, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpyFromSymbol(&tmp_v, d_fun_vals, sizeof (tmp_v)));
+    gpuAssert(cudaMemcpy(val, tmp_v, sizeof(T) * size, cudaMemcpyDeviceToHost));
 
     for (int i = 0; i < size; ++i)
         ostr << p[i] << " " << val[i] << "\n";
@@ -2410,7 +2421,7 @@ calculate_error(int n)
     T *tmp;
     T *result = new T[N2];
 
-    cutilSafeCall(cudaMalloc(&tmp, sizeof (T) * N2));
+    gpuAssert(cudaMalloc(&tmp, sizeof (T) * N2));
 
     dim3 block_grid(n,n);
     dim3 thread_grid(QPC, QPC);
@@ -2418,7 +2429,7 @@ calculate_error(int n)
     calculate_norm<degree, T> <<<block_grid, thread_grid>>>(tmp);
     check_error("calculate_norm", cudaGetLastError());
 
-    cutilSafeCall(cudaMemcpy(result, tmp, sizeof (T) * N2, cudaMemcpyDeviceToHost));
+    gpuAssert(cudaMemcpy(result, tmp, sizeof (T) * N2, cudaMemcpyDeviceToHost));
 
     T sum = 0;
     for (int i = 0; i < N2; ++i)
@@ -2428,7 +2439,7 @@ calculate_error(int n)
 
     delete []result;
 
-    cutilSafeCall(cudaFree(tmp));
+    gpuAssert(cudaFree(tmp));
     return sqrt(sum);
 }
 

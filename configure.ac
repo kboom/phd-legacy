@@ -20,14 +20,14 @@ AC_ARG_WITH([cuda],
 NVCC="$CUDA_INSTALL_PATH/bin/nvcc"
 AC_SUBST(NVCC)
 
-CUDA_SDK_INSTALL_PATH="/usr/local/NVIDIA_GPU_Computing_SDK"
+CUDA_SDK_INSTALL_PATH="/usr/local/cuda-7.5"
 AC_ARG_WITH([cuda-sdk],
    [AS_HELP_STRING(
         [--with-cuda-sdk=PATH],
         [directory where CUDA SDK is installed @<:@default=auto@:>@])],
    [CUDA_SDK_INSTALL_PATH=$withval],
    [with_cuda_sdk=auto])
-cuda_CPPFLAGS="-I${CUDA_SDK_INSTALL_PATH}/C/common/inc"
+cuda_CPPFLAGS="-I${CUDA_SDK_INSTALL_PATH}/include"
 cuda_LIBS="-lcublas -lcuda"
 AC_SUBST(cuda_CPPFLAGS)
 AC_SUBST(cuda_LIBS)
