@@ -2144,8 +2144,9 @@ template<class T>
 void
 solve_magma(int r_cnt, int pad);
 
+template<>
 void
-solve_magma(int r_cnt, int pad)
+solve_magma<double>(int r_cnt, int pad)
 {
     typedef double T;
     int info, ldda, lddb, *ipiv;
@@ -2165,11 +2166,32 @@ solve_magma(int r_cnt, int pad)
     {
         std::clog << "Factorization ERROR " << info << "\n";
     }
-    res = magma_dgetrs_gpu(MagmaTrans, r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
+    res = magma_dgetrs_gpu('T', r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
     if (res != MAGMA_SUCCESS)
     {
         std::clog << "Solver ERROR " << info << "\n";
     }
+
+    delete[] ipiv;
+}
+
+template<>
+void
+solve_magma<float>(int r_cnt, int pad)
+{
+    typedef float T;
+    int info, ldda, lddb, *ipiv;
+    T *mat, *rhs;
+    gpuAssert(cudaMemcpyFromSymbol(&mat, d_Bv, sizeof (T*)));
+    ldda = r_cnt + pad + 1;
+    lddb = r_cnt;
+    rhs = mat + r_cnt * ldda;
+    mat += pad;
+
+    ipiv = new int[r_cnt];
+    for(int i=0 ; i<r_cnt ; ++i) ipiv[i] = i+1;
+
+    magma_sgetrs_gpu('N',r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
 
     delete[] ipiv;
 }
@@ -2422,10 +2444,121 @@ calculate_error(int n)
 }
 
 typedef void (*device_fun)(int);
+// <editor-fold defaultstate="collapsed" desc="interface functions (float)">
 
-
+template<>
 void
-CUDA_prepare_device(int degree, int n)
+CUDA_prepare_device<float>(int degree, int n)
+{
+    static device_fun prepares[] = {
+        prepare_device<float, 1 >,
+        prepare_device<float, 2 >,
+        prepare_device<float, 3 >,
+    };
+
+    prepares[degree - 1](n);
+}
+
+template<>
+void
+CUDA_init_fronts<float>(int degree, int n)
+{
+    static device_fun initializers[] = {
+        init_fronts<float, 1 >,
+        init_fronts<float, 2 >,
+        init_fronts<float, 3 >,
+    };
+
+    initializers[degree - 1](n);
+}
+
+template<>
+void
+CUDA_eliminate<float>(int degree, int n)
+{
+    static device_fun solvers[] = {
+        eliminate<float, 1 >,
+        eliminate<float, 2 >,
+        eliminate<float, 3 >,
+    };
+
+    solvers[degree - 1](n);
+}
+
+template<>
+void
+CUDA_solve_last_equation<float>(int degree, int n)
+{
+    static device_fun solvers[] = {
+        solve_last_equation<float, 1>,
+        solve_last_equation<float, 2>,
+        solve_last_equation<float, 3>,
+    };
+
+    solvers[degree - 1](n);
+}
+
+template<>
+void
+CUDA_backward_substitution<float>(int degree, int n)
+{
+    static device_fun backward_subs[] = {
+        backward_substitution<float, 1>,
+        backward_substitution<float, 2>,
+        backward_substitution<float, 3>,
+    };
+
+    backward_subs[degree - 1](n);
+}
+
+template<>
+float
+CUDA_error<float>(int degree, int n)
+{
+    typedef float (*error_fun)(int);
+    static error_fun calculators[] = {
+        calculate_error<float, 1 >,
+        calculate_error<float, 2 >,
+        calculate_error<float, 3 >,
+    };
+
+    return calculators[degree - 1](n);
+}
+
+template<>
+void
+CUDA_print_result<float>(int degree, int n, std::ostream &ostr)
+{
+    typedef void (*print_fun)(int, std::ostream &);
+    static print_fun printers[] = {
+        print_result<float, 1 >,
+        print_result<float, 2 >,
+        print_result<float, 3 >,
+    };
+
+    printers[degree - 1](n, ostr);
+}
+
+template<>
+void
+CUDA_debug<float>(int degree, int n)
+{
+    typedef void (*print_fun)(int);
+    static print_fun debuggers[] = {
+        debug_device<float, 1 >,
+        debug_device<float, 2 >,
+        debug_device<float, 3 >,
+    };
+
+    debuggers[degree - 1](n);
+}
+// </editor-fold>
+
+// <editor-fold defaultstate="collapsed" desc="interface functions (double)">
+
+template<>
+void
+CUDA_prepare_device<double>(int degree, int n)
 {
     static device_fun prepares[] = {
         prepare_device<double, 1 >,
@@ -2436,8 +2569,9 @@ CUDA_prepare_device(int degree, int n)
     prepares[degree - 1](n);
 }
 
+template<>
 void
-CUDA_init_fronts(int degree, int n)
+CUDA_init_fronts<double>(int degree, int n)
 {
     static device_fun initializers[] = {
         init_fronts<double, 1 >,
@@ -2448,8 +2582,9 @@ CUDA_init_fronts(int degree, int n)
     initializers[degree - 1](n);
 }
 
+template<>
 void
-CUDA_eliminate(int degree, int n)
+CUDA_eliminate<double>(int degree, int n)
 {
     static device_fun elims[] = {
         eliminate<double, 1 >,
@@ -2460,8 +2595,9 @@ CUDA_eliminate(int degree, int n)
     elims[degree - 1](n);
 }
 
+template<>
 void
-CUDA_solve_last_equation(int degree, int n)
+CUDA_solve_last_equation<double>(int degree, int n)
 {
     static device_fun solvers[] = {
         solve_last_equation<double, 1>,
@@ -2472,8 +2608,9 @@ CUDA_solve_last_equation(int degree, int n)
     solvers[degree - 1](n);
 }
 
+template<>
 void
-CUDA_backward_substitution(int degree, int n)
+CUDA_backward_substitution<double>(int degree, int n)
 {
     static device_fun backward_subs[] = {
         backward_substitution<double, 1>,
@@ -2484,8 +2621,9 @@ CUDA_backward_substitution(int degree, int n)
     backward_subs[degree - 1](n);
 }
 
+template<>
 double
-CUDA_error(int degree, int n)
+CUDA_error<double>(int degree, int n)
 {
     typedef double (*error_fun)(int);
     static error_fun calculators[] = {
@@ -2497,8 +2635,9 @@ CUDA_error(int degree, int n)
     return calculators[degree - 1](n);
 }
 
+template<>
 void
-CUDA_print_result(int degree, int n, std::ostream &ostr)
+CUDA_print_result<double>(int degree, int n, std::ostream &ostr)
 {
     typedef void (*print_fun)(int, std::ostream &);
     static print_fun printers[] = {
@@ -2510,8 +2649,9 @@ CUDA_print_result(int degree, int n, std::ostream &ostr)
     printers[degree - 1](n, ostr);
 }
 
+template<>
 void
-CUDA_debug(int degree, int n)
+CUDA_debug<double>(int degree, int n)
 {
     typedef void (*print_fun)(int);
     static print_fun debuggers[] = {
