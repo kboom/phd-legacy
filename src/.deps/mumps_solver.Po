@@ -1,12 +1,38 @@
-mumps_solver.o: mumps_solver.cc ../include/mumps_solver.h \
- /kylo/programy/CAD/MUMPS_4.9.2/include/dmumps_c.h \
- /kylo/programy/CAD/MUMPS_4.9.2/include/mumps_compat.h \
- /kylo/programy/CAD/MUMPS_4.9.2/include/mumps_c_types.h
+mumps_solver.o: mumps_solver.cc /usr/include/stdc-predef.h \
+ ../include/mumps_solver.h \
+ /home/gurgula/libs/MUMPS_5.0.2/include/dmumps_c.h \
+ /home/gurgula/libs/MUMPS_5.0.2/include/mumps_compat.h \
+ /home/gurgula/libs/MUMPS_5.0.2/include/mumps_c_types.h \
+ /usr/include/inttypes.h /usr/include/features.h /usr/include/sys/cdefs.h \
+ /usr/include/bits/wordsize.h /usr/include/gnu/stubs.h \
+ /usr/include/gnu/stubs-64.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h \
+ /usr/include/stdint.h /usr/include/bits/wchar.h
+
+/usr/include/stdc-predef.h:
 
 ../include/mumps_solver.h:
 
-/kylo/programy/CAD/MUMPS_4.9.2/include/dmumps_c.h:
+/home/gurgula/libs/MUMPS_5.0.2/include/dmumps_c.h:
 
-/kylo/programy/CAD/MUMPS_4.9.2/include/mumps_compat.h:
+/home/gurgula/libs/MUMPS_5.0.2/include/mumps_compat.h:
 
-/kylo/programy/CAD/MUMPS_4.9.2/include/mumps_c_types.h:
+/home/gurgula/libs/MUMPS_5.0.2/include/mumps_c_types.h:
+
+/usr/include/inttypes.h:
+
+/usr/include/features.h:
+
+/usr/include/sys/cdefs.h:
+
+/usr/include/bits/wordsize.h:
+
+/usr/include/gnu/stubs.h:
+
+/usr/include/gnu/stubs-64.h:
+
+/usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdint.h:
+
+/usr/include/stdint.h:
+
+/usr/include/bits/wchar.h:

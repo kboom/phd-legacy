@@ -50,7 +50,7 @@ AC_ARG_WITH([magma-dir],
    [MAGMA_DIR=$withval],
    [with_magma_dir=auto])
 magma_CPPFLAGS="-I${MAGMA_DIR}/include"
-magma_LIBS="-L${MAGMA_DIR}/lib -lmagma -lmagmablas -lmagma"
+magma_LIBS="-L${MAGMA_DIR}/lib -lmagma"
 AC_SUBST(magma_CPPFLAGS)
 AC_SUBST(magma_LIBS)
 
