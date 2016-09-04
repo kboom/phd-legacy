@@ -1,4 +1,5 @@
 #include <config.h>
+#include <CUDA_interface.h>
 #include <cuda_runtime.h>
 #include <device_launch_parameters.h>
 #include <float.h>
@@ -2166,7 +2167,7 @@ solve_magma<double>(int r_cnt, int pad)
     {
         std::clog << "Factorization ERROR " << info << "\n";
     }
-    res = magma_dgetrs_gpu('T', r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
+    res = magma_dgetrs_gpu(MagmaTrans, r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
     if (res != MAGMA_SUCCESS)
     {
         std::clog << "Solver ERROR " << info << "\n";
@@ -2191,7 +2192,7 @@ solve_magma<float>(int r_cnt, int pad)
     ipiv = new int[r_cnt];
     for(int i=0 ; i<r_cnt ; ++i) ipiv[i] = i+1;
 
-    magma_sgetrs_gpu('N',r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
+    magma_sgetrs_gpu(MagmaNoTrans,r_cnt, 1, mat, ldda, ipiv, rhs, lddb, &info);
 
     delete[] ipiv;
 }

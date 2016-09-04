@@ -3134,7 +3134,7 @@ else
 fi
 
 magma_CPPFLAGS="-I${MAGMA_DIR}/include"
-magma_LIBS="-L${MAGMA_DIR}/lib -lmagma"
+magma_LIBS="-L${MAGMA_DIR}/lib -lmagma -lopenblas"
 
 
 
@@ -3151,7 +3151,7 @@ else
 fi
 
 mumps_CPPFLAGS="-I${MUMPS_DIR}/include"
-mumps_LIBS="-L${MUMPS_DIR}/lib -L${MUMPS_DIR}/libseq -ldmumps -lmpiseq -lmumps_common -lpord -lblas -lpthread -lgfortran"
+mumps_LIBS="-L${MUMPS_DIR}/lib -L${MUMPS_DIR}/libseq -ldmumps -lmpiseq -lmumps_common -lpord -lblas -lpthread -lgfortran -lmetis -lscotch"
 
 
 
@@ -3166,7 +3166,7 @@ else
 fi
 
 user_CPPFLAGS="-I${USER_LIB}/include"
-user_LIBS="-I${USER_LIB}/lib"
+user_LIBS="-L${USER_LIB}/lib"
 
 
 

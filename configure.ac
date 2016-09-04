@@ -50,7 +50,7 @@ AC_ARG_WITH([magma-dir],
    [MAGMA_DIR=$withval],
    [with_magma_dir=auto])
 magma_CPPFLAGS="-I${MAGMA_DIR}/include"
-magma_LIBS="-L${MAGMA_DIR}/lib -lmagma"
+magma_LIBS="-L${MAGMA_DIR}/lib -lmagma -lopenblas"
 AC_SUBST(magma_CPPFLAGS)
 AC_SUBST(magma_LIBS)
 
@@ -65,7 +65,7 @@ AC_ARG_WITH([mumps-dir],
    [MUMPS_DIR=$withval],
    [with_mumps_dir=auto])
 mumps_CPPFLAGS="-I${MUMPS_DIR}/include"
-mumps_LIBS="-L${MUMPS_DIR}/lib -L${MUMPS_DIR}/libseq -ldmumps -lmpiseq -lmumps_common -lpord -lblas -lpthread -lgfortran"
+mumps_LIBS="-L${MUMPS_DIR}/lib -L${MUMPS_DIR}/libseq -ldmumps -lmpiseq -lmumps_common -lpord -lblas -lpthread -lgfortran -lmetis -lscotch"
 AC_SUBST(mumps_CPPFLAGS)
 AC_SUBST(mumps_LIBS)
 
@@ -78,7 +78,7 @@ AC_ARG_WITH([user-lib],
    [USER_LIB=$withval],
    [with_user_lib=auto])
 user_CPPFLAGS="-I${USER_LIB}/include"
-user_LIBS="-I${USER_LIB}/lib"
+user_LIBS="-L${USER_LIB}/lib"
 AC_SUBST(user_CPPFLAGS)
 AC_SUBST(user_LIBS)
 
