@@ -1,8 +1,3 @@
-/* 
- * File:   CUDA_interface.h
- * Author: Krzysztof Kuźnik <kmkuznik at gmail.com>
- */
-
 #ifndef CUDA_INTERFACE_H
 #define	CUDA_INTERFACE_H
 

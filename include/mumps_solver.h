@@ -1,8 +1,3 @@
-/* 
- * File:   mumps_solver.h
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef MUMPS_SOLVER_H
 #define	MUMPS_SOLVER_H
 

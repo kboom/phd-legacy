@@ -1,8 +1,3 @@
-/* 
- * File:   utils.cuh
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef UTILS_CUH
 #define	UTILS_CUH
 
@@ -71,55 +66,55 @@ struct p_2D {
 
     __device__ __host__
     p_2D(T x, T y) : x(x), y(y) { }
-    
+
     __device__ __host__
     p_2D(T x) : x(x), y(x) { }
 
     __device__ __host__
     p_2D() {}
-    
+
     __device__ __host__
     p_2D<T>
     operator+(T num) const
     {
         return p_2D<T>(x + num, y + num);
     }
-    
+
     __device__ __host__
     p_2D<T>
     operator+(p_2D<T> p) const
     {
         return p_2D<T>(x + p.x, y + p.y);
     }
-    
+
     __device__ __host__
     p_2D<T>
     operator-(p_2D<T> p) const
     {
         return p_2D<T>(x - p.x, y - p.y);
     }
-    
+
     __device__ __host__
     p_2D<T>
     operator-(T num) const
     {
         return p_2D<T>(x - num, y - num);
     }
-    
+
     __device__ __host__
     p_2D<T>
     operator*(T num) const
     {
         return p_2D<T>(x * num, y * num);
     }
-    
+
     __device__ __host__
     p_2D<T>
     operator*(p_2D<T> p) const
     {
         return p_2D<T>(x * p.x, y * p.y);
     }
-    
+
     __device__ __host__
     p_2D<T> &
     operator+=(p_2D<T>& a)
@@ -128,7 +123,7 @@ struct p_2D {
         y += a.y;
         return *this;
     }
-    
+
     __device__ __host__
     p_2D<T> &
     operator/=(T num)
@@ -137,7 +132,7 @@ struct p_2D {
         y /= num;
         return *this;
     }
-    
+
     __device__ __host__
     friend
     p_2D<T>
@@ -145,27 +140,27 @@ struct p_2D {
     {
         return p*num;
     }
-    
+
     __device__ __host__
     bool
     operator>=(T num) const
     {
         return x >= num || y >= num;
     }
-    
+
     __device__ __host__
     bool
     operator==(const p_2D<T>& p) const
     {
         return x == p.x && y == p.y;
     }
-    
+
     __device__ __host__
     operator dim3() const
     {
         return dim3(x, y, 1);
     }
-    
+
     __device__ __host__
     T
     length() const
@@ -180,10 +175,10 @@ template<class T>
 struct array_2d {
     T* p;
     int row_length;
-    
+
     __device__ __host__
     array_2d(T* p, int row_length) : p(p), row_length(row_length) { }
-    
+
     __device__ __host__
     T*
     operator[](int n) const
@@ -196,10 +191,10 @@ template<class T>
 struct vertical_vec {
     T* p;
     int padding;
-    
+
     __device__ __host__
     vertical_vec(T* p, int padding) : p(p), padding(padding) { }
-    
+
     __device__ __host__
     T&
     operator[](int n)
@@ -213,7 +208,7 @@ struct vertical_vec {
  * which part of basis function domain is located in provided element.
  * @param element_xy index of an element
  * @param fun_xy index of a basis function
- * @return 
+ * @return
  */
 template <int degree, class T>
 __device__ __host__
@@ -283,7 +278,7 @@ create_configuration_for_num_threads(int num_threads,
     block_grid.y = (required_blocks / block_grid.x)
             + (required_blocks % block_grid.x > 0);
     block_grid.z = 1;
-    
+
 }
 #endif	/* UTILS_CUH */
 

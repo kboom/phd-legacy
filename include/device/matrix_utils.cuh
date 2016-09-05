@@ -1,4 +1,4 @@
-/* 
+/*
  * File:   matrix_utils.cuh
  * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
  */
@@ -166,7 +166,7 @@ calculate_first_row(T (&M)[X][Y], T (&RHS)[X])
 {
     T lead = M[0][0];
     M[0][threadIdx.x+1] /= lead;
-    
+
     __syncthreads();
 
     if(threadIdx.x == 0) {

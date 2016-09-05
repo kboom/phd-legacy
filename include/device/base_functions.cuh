@@ -1,8 +1,3 @@
-/* 
- * File:   base_functions.cuh
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef BASE_FUNCTIONS_CUH
 #define	BASE_FUNCTIONS_CUH
 
@@ -87,14 +82,14 @@ dN(T x, int i)
     return (is_zero(h1) ?
             0
             :
-            ((x - d_knot_vector[i]) * dN < degree - 1 > (x, i) 
+            ((x - d_knot_vector[i]) * dN < degree - 1 > (x, i)
             + N < degree - 1 > (x, i)) / h1)
 
             + (is_zero(h2) ?
             0
             :
             ((d_knot_vector[i + degree + 1] - x)
-            * dN < degree - 1 > (x, i + 1) 
+            * dN < degree - 1 > (x, i + 1)
             - N < degree - 1 > (x, i + 1)) / h2);
 }
 

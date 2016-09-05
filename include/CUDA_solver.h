@@ -1,8 +1,3 @@
-/* 
- * File:   CUDA_solver.h
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef CUDA_SOLVER_H
 #define	CUDA_SOLVER_H
 
@@ -49,13 +44,13 @@ class CUDA_solver : public bspline_fem_solver<T> {
     {
         CUDA_solve_last_equation<T>(degree, _N);
     }
-    
+
     virtual void
     backward_substitution()
     {
         CUDA_backward_substitution<T>(degree, _N);
     }
-    
+
     virtual T
     error(param_fun)
     {
@@ -67,7 +62,7 @@ class CUDA_solver : public bspline_fem_solver<T> {
     {
         CUDA_print_result<T>(degree, _N, ostr);
     }
-    
+
     virtual void
     debug()
     {

@@ -354,7 +354,7 @@ eval_L(int_2 fun_xy, int_2 element_xy, int _n)
 template<int degree, class T>
 __global__
 void
-init_local_L(int _n)
+init_local_L(int _n) // G: RHS vector - x is the RHS index
 {
     int_2 element_xy(blockIdx.x, blockIdx.y);
     int_2 function_xy = idx_to_xy<degree+1>(threadIdx.x);
@@ -373,7 +373,7 @@ init_local_L(int _n)
     else
     {
         function_xy += element_xy;
-        d_Lh[n] = eval_L<degree, T>(function_xy, element_xy, _n + degree);
+        d_Lh[n] = eval_L<degree, T>(function_xy, element_xy, _n + degree); // G: set value
     }
 }
 
@@ -2027,7 +2027,7 @@ init_fronts(int n)
         dim3 block_grid(n, n, 1);
         dim3 thread_grid((degree + 1) * (degree + 1), 1, 1);
 
-        init_local_L<degree, T><<<block_grid, thread_grid>>>(n);
+        init_local_L<degree, T><<<block_grid, thread_grid>>>(n); // G: RHS = L because of fig 4.7?
         check_error("eval_L_for_element", cudaGetLastError());
     }
 

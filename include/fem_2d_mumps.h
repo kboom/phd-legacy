@@ -1,8 +1,3 @@
-/* 
- * File:   fem_2d_mumps.h
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef FEM_2D_MUMPS_H
 #define	FEM_2D_MUMPS_H
 

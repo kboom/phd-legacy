@@ -1,10 +1,3 @@
-/*
- * File:   merge_utils.cuh
- * Author: Krzysztof Kuznik
- *
- * Created on July 20, 2011, 1:27 PM
- */
-
 #ifndef MERGE_UTILS_CUH
 #define	MERGE_UTILS_CUH
 

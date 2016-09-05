@@ -1,10 +1,3 @@
-/* 
- * File:   quadratures.h
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- *
- * Created on February 13, 2011, 6:22 PM
- */
-
 #ifndef QUADRATURES_H
 #define	QUADRATURES_H
 

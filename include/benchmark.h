@@ -1,8 +1,3 @@
-/* 
- * File:   benchmark.h
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef BENCHMARK_H
 #define	BENCHMARK_H
 

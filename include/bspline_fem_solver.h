@@ -1,8 +1,3 @@
-/* 
- * File:   bspline_fem_solver.h
- * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
- */
-
 #ifndef BSPLINE_FEM_SOLVER_H
 #define	BSPLINE_FEM_SOLVER_H
 
@@ -29,9 +24,9 @@ class bspline_fem_solver {
                       T gamma = 0) = 0;
 
     virtual void eliminate() = 0;
-    
+
     virtual void solve_last_equation() = 0;
-    
+
     virtual void backward_substitution() = 0;
 
     virtual T error(param_fun ideal_solution = zero) = 0;
