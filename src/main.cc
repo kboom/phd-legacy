@@ -64,10 +64,11 @@ test_runner(int test_count = 20)
 
 template<int degree, class T>
 void
-single_run(int intervals)
+single_run(int intervals, int rhs_cnt = 1)
 {
     Tester<T, degree> tester("CUDA");
     tester.set_benchmark(1);
+    tester.set_rhs_cnt(rhs_cnt)
 
     tester.run_method(intervals, false);
 }
@@ -77,13 +78,19 @@ main()
 {
     typedef double precision;
 
-    int test_count = 1;
+    // int test_count = 1;
 
-    test_runner < 1, precision > (test_count);
-    test_runner < 2, precision > (test_count);
-    test_runner < 3, precision > (test_count);
-    test_runner < 4, precision > (test_count);
-    test_runner < 5, precision > (test_count);
+    // test_runner < 1, precision > (test_count);
+    // test_runner < 2, precision > (test_count);
+    // test_runner < 3, precision > (test_count);
+    // test_runner < 4, precision > (test_count);
+    // test_runner < 5, precision > (test_count);
+
+    // Maciek 10.08
+    single_run<precision, 2> (128, 128);
+    single_run<precision, 2> (256, 256);
+    single_run<precision, 2> (512, 512);
+    single_run<precision, 2> (1024, 1024);
 
     //    test_method_exponent<float, 3> (2, 4 * 2, 4096);
     //            test_method_exponent<float, 1 > (2, 4, 4096);
