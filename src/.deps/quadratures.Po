@@ -1,0 +1,6 @@
+quadratures.o: quadratures.cc /usr/include/stdc-predef.h \
+ ../include/quadratures.h
+
+/usr/include/stdc-predef.h:
+
+../include/quadratures.h:
