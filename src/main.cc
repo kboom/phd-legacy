@@ -68,7 +68,7 @@ single_run(int intervals, int rhs_cnt = 1)
 {
     Tester<T, degree> tester("CUDA");
     tester.set_benchmark(1);
-    tester.set_rhs_cnt(rhs_cnt)
+    tester.set_rhs_cnt(rhs_cnt);
 
     tester.run_method(intervals, false);
 }
