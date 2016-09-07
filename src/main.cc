@@ -70,7 +70,6 @@ single_run(int element_cnt = 256, int rhs_cnt = 1)
     tester.set_benchmark(1);
     tester.set_rhs_cnt(rhs_cnt);
 
-    tester.run_method(intervals, false);
     print_result_for_Ne(element_cnt, tester.test_method(element_cnt));
 }
 
