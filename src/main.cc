@@ -64,14 +64,14 @@ test_runner(int test_count = 20)
 
 template<int degree, class T>
 void
-single_run(int intervals, int rhs_cnt = 1)
+single_run(int element_cnt = 256, int rhs_cnt = 1)
 {
     Tester<T, degree> tester("CUDA");
     tester.set_benchmark(1);
     tester.set_rhs_cnt(rhs_cnt);
 
     tester.run_method(intervals, false);
-    print_results(tester.test_method_exponent((degree + 1) * 2, 20000));
+    print_results(tester.test_method(element_cnt));
 }
 
 int
