@@ -1,14 +1,16 @@
 
-#include <cutil_inline.h>
+#include <config.h>
+#include <CUDA_interface.h>
+#include <cuda_runtime.h>
+#include <device_launch_parameters.h>
 #include <float.h>
 #include <iostream>
 #include <cmath>
 #include <boost/format.hpp>
-#include "../include/CUDA_interface.h"
-#include "../include/device/utils.cuh"
-#include "../include/device/base_functions.cuh"
-#include "../include/device/matrix_utils.cuh"
-#include "../include/quadratures.h"
+#include <device/utils.cuh>
+#include <device/base_functions.cuh>
+#include <device/merge_utils.cuh>
+#include "quadratures.h"
 
 #if __CUDA_ARCH__ >= 200
 #define THREADS_PER_BLOCK 16
