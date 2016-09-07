@@ -87,10 +87,10 @@ main()
     // test_runner < 5, precision > (test_count);
 
     // Maciek 10.08
-    single_run<precision, 2> (128, 128);
-    single_run<precision, 2> (256, 256);
-    single_run<precision, 2> (512, 512);
-    single_run<precision, 2> (1024, 1024);
+    single_run<2, precision> (128, 128);
+    single_run<2, precision> (256, 256);
+    single_run<2, precision> (512, 512);
+    single_run<2, precision> (1024, 1024);
 
     //    test_method_exponent<float, 3> (2, 4 * 2, 4096);
     //            test_method_exponent<float, 1 > (2, 4, 4096);
