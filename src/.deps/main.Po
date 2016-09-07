@@ -1,32 +1,15 @@
-main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
- ../include/benchmark.h /usr/include/c++/4.8.2/cmath \
+main.o: main.cc /usr/include/stdc-predef.h ../include/benchmark.h \
+ /usr/include/c++/4.8.2/vector /usr/include/c++/4.8.2/bits/stl_algobase.h \
  /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++config.h \
  /usr/include/bits/wordsize.h \
  /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/os_defines.h \
  /usr/include/features.h /usr/include/sys/cdefs.h \
  /usr/include/gnu/stubs.h /usr/include/gnu/stubs-64.h \
  /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/cpu_defines.h \
- /usr/include/c++/4.8.2/bits/cpp_type_traits.h \
- /usr/include/c++/4.8.2/ext/type_traits.h /usr/include/math.h \
- /usr/include/bits/huge_val.h /usr/include/bits/huge_valf.h \
- /usr/include/bits/huge_vall.h /usr/include/bits/inf.h \
- /usr/include/bits/nan.h /usr/include/bits/mathdef.h \
- /usr/include/bits/mathcalls.h /usr/include/bits/mathinline.h \
- /usr/include/c++/4.8.2/iostream /usr/include/c++/4.8.2/ostream \
- /usr/include/c++/4.8.2/ios /usr/include/c++/4.8.2/iosfwd \
- /usr/include/c++/4.8.2/bits/stringfwd.h \
- /usr/include/c++/4.8.2/bits/memoryfwd.h \
- /usr/include/c++/4.8.2/bits/postypes.h /usr/include/c++/4.8.2/cwchar \
- /usr/include/wchar.h /usr/include/stdio.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
- /usr/include/bits/wchar.h \
- /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
- /usr/include/xlocale.h /usr/include/c++/4.8.2/exception \
- /usr/include/c++/4.8.2/bits/atomic_lockfree_defines.h \
- /usr/include/c++/4.8.2/bits/char_traits.h \
- /usr/include/c++/4.8.2/bits/stl_algobase.h \
  /usr/include/c++/4.8.2/bits/functexcept.h \
  /usr/include/c++/4.8.2/bits/exception_defines.h \
+ /usr/include/c++/4.8.2/bits/cpp_type_traits.h \
+ /usr/include/c++/4.8.2/ext/type_traits.h \
  /usr/include/c++/4.8.2/ext/numeric_traits.h \
  /usr/include/c++/4.8.2/bits/stl_pair.h \
  /usr/include/c++/4.8.2/bits/move.h \
@@ -35,6 +18,37 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /usr/include/c++/4.8.2/bits/stl_iterator_base_funcs.h \
  /usr/include/c++/4.8.2/debug/debug.h \
  /usr/include/c++/4.8.2/bits/stl_iterator.h \
+ /usr/include/c++/4.8.2/bits/allocator.h \
+ /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++allocator.h \
+ /usr/include/c++/4.8.2/ext/new_allocator.h /usr/include/c++/4.8.2/new \
+ /usr/include/c++/4.8.2/exception \
+ /usr/include/c++/4.8.2/bits/atomic_lockfree_defines.h \
+ /usr/include/c++/4.8.2/bits/memoryfwd.h \
+ /usr/include/c++/4.8.2/bits/stl_construct.h \
+ /usr/include/c++/4.8.2/ext/alloc_traits.h \
+ /usr/include/c++/4.8.2/bits/stl_uninitialized.h \
+ /usr/include/c++/4.8.2/bits/stl_vector.h \
+ /usr/include/c++/4.8.2/bits/stl_bvector.h \
+ /usr/include/c++/4.8.2/bits/range_access.h \
+ /usr/include/c++/4.8.2/bits/vector.tcc /usr/include/c++/4.8.2/map \
+ /usr/include/c++/4.8.2/bits/stl_tree.h \
+ /usr/include/c++/4.8.2/bits/stl_function.h \
+ /usr/include/c++/4.8.2/backward/binders.h \
+ /usr/include/c++/4.8.2/bits/stl_map.h \
+ /usr/include/c++/4.8.2/bits/stl_multimap.h /usr/include/c++/4.8.2/cmath \
+ /usr/include/math.h /usr/include/bits/huge_val.h \
+ /usr/include/bits/huge_valf.h /usr/include/bits/huge_vall.h \
+ /usr/include/bits/inf.h /usr/include/bits/nan.h \
+ /usr/include/bits/mathdef.h /usr/include/bits/mathcalls.h \
+ /usr/include/bits/mathinline.h /usr/include/c++/4.8.2/iostream \
+ /usr/include/c++/4.8.2/ostream /usr/include/c++/4.8.2/ios \
+ /usr/include/c++/4.8.2/iosfwd /usr/include/c++/4.8.2/bits/stringfwd.h \
+ /usr/include/c++/4.8.2/bits/postypes.h /usr/include/c++/4.8.2/cwchar \
+ /usr/include/wchar.h /usr/include/stdio.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stdarg.h \
+ /usr/include/bits/wchar.h \
+ /usr/lib/gcc/x86_64-redhat-linux/4.8.5/include/stddef.h \
+ /usr/include/xlocale.h /usr/include/c++/4.8.2/bits/char_traits.h \
  /usr/include/c++/4.8.2/bits/localefwd.h \
  /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++locale.h \
  /usr/include/c++/4.8.2/clocale /usr/include/locale.h \
@@ -52,14 +66,9 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /usr/include/bits/setjmp.h \
  /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/atomic_word.h \
  /usr/include/c++/4.8.2/bits/locale_classes.h \
- /usr/include/c++/4.8.2/string /usr/include/c++/4.8.2/bits/allocator.h \
- /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++allocator.h \
- /usr/include/c++/4.8.2/ext/new_allocator.h /usr/include/c++/4.8.2/new \
+ /usr/include/c++/4.8.2/string \
  /usr/include/c++/4.8.2/bits/ostream_insert.h \
  /usr/include/c++/4.8.2/bits/cxxabi_forced.h \
- /usr/include/c++/4.8.2/bits/stl_function.h \
- /usr/include/c++/4.8.2/backward/binders.h \
- /usr/include/c++/4.8.2/bits/range_access.h \
  /usr/include/c++/4.8.2/bits/basic_string.h \
  /usr/include/c++/4.8.2/bits/basic_string.tcc \
  /usr/include/c++/4.8.2/bits/locale_classes.tcc \
@@ -106,11 +115,7 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /home/gurgula/usr/local/include/boost/bind/mem_fn.hpp \
  /home/gurgula/usr/local/include/boost/get_pointer.hpp \
  /home/gurgula/usr/local/include/boost/config/no_tr1/memory.hpp \
- /usr/include/c++/4.8.2/memory \
- /usr/include/c++/4.8.2/bits/stl_construct.h \
- /usr/include/c++/4.8.2/ext/alloc_traits.h \
- /usr/include/c++/4.8.2/bits/stl_uninitialized.h \
- /usr/include/c++/4.8.2/bits/stl_tempbuf.h \
+ /usr/include/c++/4.8.2/memory /usr/include/c++/4.8.2/bits/stl_tempbuf.h \
  /usr/include/c++/4.8.2/bits/stl_raw_storage_iter.h \
  /usr/include/c++/4.8.2/backward/auto_ptr.h \
  /home/gurgula/usr/local/include/boost/bind/mem_fn_template.hpp \
@@ -129,9 +134,7 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /home/gurgula/usr/local/include/boost/bind/bind_mf2_cc.hpp \
  /home/gurgula/usr/local/include/boost/bind/placeholders.hpp \
  /home/gurgula/usr/local/include/boost/format.hpp \
- /usr/include/c++/4.8.2/vector /usr/include/c++/4.8.2/bits/stl_vector.h \
- /usr/include/c++/4.8.2/bits/stl_bvector.h \
- /usr/include/c++/4.8.2/bits/vector.tcc /usr/include/c++/4.8.2/locale \
+ /usr/include/c++/4.8.2/locale \
  /usr/include/c++/4.8.2/bits/locale_facets_nonio.h \
  /usr/include/c++/4.8.2/ctime \
  /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/time_members.h \
@@ -521,9 +524,6 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_day.hpp \
  /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_year.hpp \
  /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_month.hpp \
- /usr/include/c++/4.8.2/map /usr/include/c++/4.8.2/bits/stl_tree.h \
- /usr/include/c++/4.8.2/bits/stl_map.h \
- /usr/include/c++/4.8.2/bits/stl_multimap.h \
  /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_duration.hpp \
  /home/gurgula/usr/local/include/boost/date_time/date_duration.hpp \
  /home/gurgula/usr/local/include/boost/date_time/date_duration_types.hpp \
@@ -1006,7 +1006,7 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /home/gurgula/usr/local/include/boost/date_time/posix_time/conversion.hpp \
  /home/gurgula/usr/local/include/boost/date_time/posix_time/time_parsers.hpp \
  ../include/solver_factory.h ../include/bspline_fem_solver.h \
- ../include/fem_2d_mumps.h \
+ ../include/FEM_1D_mumps.h \
  /home/gurgula/usr/local/include/boost/lambda/lambda.hpp \
  /home/gurgula/usr/local/include/boost/lambda/core.hpp \
  /home/gurgula/usr/local/include/boost/type_traits/transform_traits.hpp \
@@ -1060,16 +1060,15 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
  /home/gurgula/libs/MUMPS_5.0.2/include/mumps_c_types.h \
  /usr/include/inttypes.h ../include/base_functions.h \
  ../include/quadratures.h ../include/bspline_fem_solver.h \
- ../include/CUDA_solver.h ../include/CUDA_interface.h \
- ../include/base_functions.h
+ ../include/CUDA_solver.h ../include/CUDA_interface.h
 
 /usr/include/stdc-predef.h:
 
-../include/config.h:
-
 ../include/benchmark.h:
 
-/usr/include/c++/4.8.2/cmath:
+/usr/include/c++/4.8.2/vector:
+
+/usr/include/c++/4.8.2/bits/stl_algobase.h:
 
 /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++config.h:
 
@@ -1087,9 +1086,71 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 
 /usr/include/c++/4.8.2/x86_64-redhat-linux/bits/cpu_defines.h:
 
+/usr/include/c++/4.8.2/bits/functexcept.h:
+
+/usr/include/c++/4.8.2/bits/exception_defines.h:
+
 /usr/include/c++/4.8.2/bits/cpp_type_traits.h:
 
 /usr/include/c++/4.8.2/ext/type_traits.h:
+
+/usr/include/c++/4.8.2/ext/numeric_traits.h:
+
+/usr/include/c++/4.8.2/bits/stl_pair.h:
+
+/usr/include/c++/4.8.2/bits/move.h:
+
+/usr/include/c++/4.8.2/bits/concept_check.h:
+
+/usr/include/c++/4.8.2/bits/stl_iterator_base_types.h:
+
+/usr/include/c++/4.8.2/bits/stl_iterator_base_funcs.h:
+
+/usr/include/c++/4.8.2/debug/debug.h:
+
+/usr/include/c++/4.8.2/bits/stl_iterator.h:
+
+/usr/include/c++/4.8.2/bits/allocator.h:
+
+/usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++allocator.h:
+
+/usr/include/c++/4.8.2/ext/new_allocator.h:
+
+/usr/include/c++/4.8.2/new:
+
+/usr/include/c++/4.8.2/exception:
+
+/usr/include/c++/4.8.2/bits/atomic_lockfree_defines.h:
+
+/usr/include/c++/4.8.2/bits/memoryfwd.h:
+
+/usr/include/c++/4.8.2/bits/stl_construct.h:
+
+/usr/include/c++/4.8.2/ext/alloc_traits.h:
+
+/usr/include/c++/4.8.2/bits/stl_uninitialized.h:
+
+/usr/include/c++/4.8.2/bits/stl_vector.h:
+
+/usr/include/c++/4.8.2/bits/stl_bvector.h:
+
+/usr/include/c++/4.8.2/bits/range_access.h:
+
+/usr/include/c++/4.8.2/bits/vector.tcc:
+
+/usr/include/c++/4.8.2/map:
+
+/usr/include/c++/4.8.2/bits/stl_tree.h:
+
+/usr/include/c++/4.8.2/bits/stl_function.h:
+
+/usr/include/c++/4.8.2/backward/binders.h:
+
+/usr/include/c++/4.8.2/bits/stl_map.h:
+
+/usr/include/c++/4.8.2/bits/stl_multimap.h:
+
+/usr/include/c++/4.8.2/cmath:
 
 /usr/include/math.h:
 
@@ -1119,8 +1180,6 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 
 /usr/include/c++/4.8.2/bits/stringfwd.h:
 
-/usr/include/c++/4.8.2/bits/memoryfwd.h:
-
 /usr/include/c++/4.8.2/bits/postypes.h:
 
 /usr/include/c++/4.8.2/cwchar:
@@ -1137,33 +1196,7 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 
 /usr/include/xlocale.h:
 
-/usr/include/c++/4.8.2/exception:
-
-/usr/include/c++/4.8.2/bits/atomic_lockfree_defines.h:
-
 /usr/include/c++/4.8.2/bits/char_traits.h:
-
-/usr/include/c++/4.8.2/bits/stl_algobase.h:
-
-/usr/include/c++/4.8.2/bits/functexcept.h:
-
-/usr/include/c++/4.8.2/bits/exception_defines.h:
-
-/usr/include/c++/4.8.2/ext/numeric_traits.h:
-
-/usr/include/c++/4.8.2/bits/stl_pair.h:
-
-/usr/include/c++/4.8.2/bits/move.h:
-
-/usr/include/c++/4.8.2/bits/concept_check.h:
-
-/usr/include/c++/4.8.2/bits/stl_iterator_base_types.h:
-
-/usr/include/c++/4.8.2/bits/stl_iterator_base_funcs.h:
-
-/usr/include/c++/4.8.2/debug/debug.h:
-
-/usr/include/c++/4.8.2/bits/stl_iterator.h:
 
 /usr/include/c++/4.8.2/bits/localefwd.h:
 
@@ -1221,23 +1254,9 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 
 /usr/include/c++/4.8.2/string:
 
-/usr/include/c++/4.8.2/bits/allocator.h:
-
-/usr/include/c++/4.8.2/x86_64-redhat-linux/bits/c++allocator.h:
-
-/usr/include/c++/4.8.2/ext/new_allocator.h:
-
-/usr/include/c++/4.8.2/new:
-
 /usr/include/c++/4.8.2/bits/ostream_insert.h:
 
 /usr/include/c++/4.8.2/bits/cxxabi_forced.h:
-
-/usr/include/c++/4.8.2/bits/stl_function.h:
-
-/usr/include/c++/4.8.2/backward/binders.h:
-
-/usr/include/c++/4.8.2/bits/range_access.h:
 
 /usr/include/c++/4.8.2/bits/basic_string.h:
 
@@ -1351,12 +1370,6 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 
 /usr/include/c++/4.8.2/memory:
 
-/usr/include/c++/4.8.2/bits/stl_construct.h:
-
-/usr/include/c++/4.8.2/ext/alloc_traits.h:
-
-/usr/include/c++/4.8.2/bits/stl_uninitialized.h:
-
 /usr/include/c++/4.8.2/bits/stl_tempbuf.h:
 
 /usr/include/c++/4.8.2/bits/stl_raw_storage_iter.h:
@@ -1394,14 +1407,6 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 /home/gurgula/usr/local/include/boost/bind/placeholders.hpp:
 
 /home/gurgula/usr/local/include/boost/format.hpp:
-
-/usr/include/c++/4.8.2/vector:
-
-/usr/include/c++/4.8.2/bits/stl_vector.h:
-
-/usr/include/c++/4.8.2/bits/stl_bvector.h:
-
-/usr/include/c++/4.8.2/bits/vector.tcc:
 
 /usr/include/c++/4.8.2/locale:
 
@@ -2190,14 +2195,6 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_year.hpp:
 
 /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_month.hpp:
-
-/usr/include/c++/4.8.2/map:
-
-/usr/include/c++/4.8.2/bits/stl_tree.h:
-
-/usr/include/c++/4.8.2/bits/stl_map.h:
-
-/usr/include/c++/4.8.2/bits/stl_multimap.h:
 
 /home/gurgula/usr/local/include/boost/date_time/gregorian/greg_duration.hpp:
 
@@ -3181,7 +3178,7 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 
 ../include/bspline_fem_solver.h:
 
-../include/fem_2d_mumps.h:
+../include/FEM_1D_mumps.h:
 
 /home/gurgula/usr/local/include/boost/lambda/lambda.hpp:
 
@@ -3302,5 +3299,3 @@ main.o: main.cc /usr/include/stdc-predef.h ../include/config.h \
 ../include/CUDA_solver.h:
 
 ../include/CUDA_interface.h:
-
-../include/base_functions.h:

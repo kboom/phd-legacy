@@ -90,8 +90,8 @@ CONFIG_CLEAN_FILES =
 CONFIG_CLEAN_VPATH_FILES =
 am__installdirs = "$(DESTDIR)$(bindir)"
 PROGRAMS = $(bin_PROGRAMS)
-am_bspline_2d_OBJECTS = main.$(OBJEXT) mumps_solver.$(OBJEXT) \
-	kernels.$(OBJEXT)
+am_bspline_2d_OBJECTS = main.$(OBJEXT) benchmark.$(OBJEXT) \
+	quadratures.$(OBJEXT) mumps_solver.$(OBJEXT) kernels.$(OBJEXT)
 bspline_2d_OBJECTS = $(am_bspline_2d_OBJECTS)
 bspline_2d_LDADD = $(LDADD)
 AM_V_P = $(am__v_P_@AM_V@)
@@ -248,7 +248,7 @@ CXXLD = $(NVCC)
 AM_CPPFLAGS = $(mumps_CPPFLAGS) $(user_CPPFLAGS)
 AM_LDFLAGS = $(mumps_LIBS) $(magma_LIBS) $(lapack_LIBS) $(cuda_LIBS) $(user_LIBS) -lm
 NVCC_CPPFLAGS = -I. -I../include $(cuda_CPPFLAGS) $(magma_CPPFLAGS) $(user_CPPFLAGS)
-bspline_2d_SOURCES = main.cc mumps_solver.cc kernels.cu
+bspline_2d_SOURCES = main.cc benchmark.cc quadratures.cc mumps_solver.cc kernels.cu
 all: all-am
 
 .SUFFIXES:
@@ -336,8 +336,10 @@ mostlyclean-compile:
 distclean-compile:
 	-rm -f *.tab.c
 
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/benchmark.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/main.Po@am__quote@
 @AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/mumps_solver.Po@am__quote@
+@AMDEP_TRUE@@am__include@ @am__quote@./$(DEPDIR)/quadratures.Po@am__quote@
 
 .cc.o:
 @am__fastdepCXX_TRUE@	$(AM_V_CXX)$(CXXCOMPILE) -MT $@ -MD -MP -MF $(DEPDIR)/$*.Tpo -c -o $@ $<

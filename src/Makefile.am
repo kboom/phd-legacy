@@ -7,7 +7,7 @@ NVCC_CPPFLAGS=-I. -I../include $(cuda_CPPFLAGS) $(magma_CPPFLAGS) $(user_CPPFLAG
 
 bin_PROGRAMS = bspline_2d
 
-bspline_2d_SOURCES = main.cc mumps_solver.cc kernels.cu
+bspline_2d_SOURCES = main.cc benchmark.cc quadratures.cc mumps_solver.cc kernels.cu
 
 .cu.o:
 	$(NVCC) $(NVCCFLAGS) $(NVCC_CPPFLAGS) -c -o $@ $<
