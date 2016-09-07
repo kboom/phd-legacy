@@ -5,6 +5,8 @@
 #include <device_launch_parameters.h>
 #include <float.h>
 #include <iostream>
+#include <fstream>
+#include <sstream>
 #include <cmath>
 #include <boost/format.hpp>
 #include <device/utils.cuh>
