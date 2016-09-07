@@ -33,11 +33,11 @@ main()
     //    test_runner < 5, precision > (test_count);
         
 //    test_method_exponent<float, 3> (2, 4 * 2, 4096);
-    test_method_exponent<precision, 1>(4, 512);
+    test_method_exponent<precision, 2>(4, 512);
 //    std::cout << "\n";
-    test_method_exponent<precision, 2>(6, 2* 192);
+    // test_method_exponent<precision, 2>(6, 2* 192);
 //    std::cout << "\n";
-    test_method_exponent<precision, 3>(8, 2 * 128);
+    // test_method_exponent<precision, 3>(8, 2 * 128);
 
 //    run_method<precision, 1>(1, 8, true);
 //    run_method<precision, 2>(2, 12, true);
