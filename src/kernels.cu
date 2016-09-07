@@ -9,7 +9,7 @@
 #include <boost/format.hpp>
 #include <device/utils.cuh>
 #include <device/base_functions.cuh>
-#include <device/merge_utils.cuh>
+#include <device/matrix_utils.cuh>
 #include "quadratures.h"
 
 #if __CUDA_ARCH__ >= 200
