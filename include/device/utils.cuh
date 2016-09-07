@@ -7,7 +7,6 @@
 #define	UTILS_CUH
 
 #include <cmath>
-#include <cutil_inline.h>
 
 template<class T>
 __device__
