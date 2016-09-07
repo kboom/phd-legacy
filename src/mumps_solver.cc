@@ -9,20 +9,18 @@ void mumps_solver::initialize(int N,
                               int NZ,
                               int* irn,
                               int* jcn,
-                              double* A,
-                              double* RHS){
+                              double* A){
     id.job = JOB_INIT;
     id.par = 1;
     id.sym = 0;
     id.comm_fortran = USE_COMM_WORLD;
     dmumps_c(&id);
-    
+
     id.n = N;
     id.nz = NZ;
     id.irn = irn;
     id.jcn = jcn;
     id.a = A;
-    id.rhs = RHS;
 
     /* No outputs */
     id.ICNTL(1) = -1;

@@ -1,3 +1,10 @@
+/* 
+ * File:   base_functions.h
+ * Author: Krzysztof Kuźnik
+ *
+ * Created on February 13, 2011, 6:07 PM
+ */
+
 #ifndef BASE_FUNCTIONS_H
 #define	BASE_FUNCTIONS_H
 

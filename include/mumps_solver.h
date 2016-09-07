@@ -1,3 +1,8 @@
+/*
+ * File:   mumps_solver.h
+ * Author: Krzysztof Kuźnik <kmkuznik@gmail.com>
+ */
+
 #ifndef MUMPS_SOLVER_H
 #define	MUMPS_SOLVER_H
 
@@ -10,54 +15,40 @@
 #define ICNTL(I) icntl[(I)-1]
 
 class mumps_solver {
-private:
+  private:
     DMUMPS_STRUC_C id;
-
-    void
-    start()
-    {
-        id.job = 3;
-        dmumps_c(&id);
-    }
-
-    void
-    stop()
-    {
-        id.job = JOB_END;
-        dmumps_c(&id);
-    }
-
 
 public:
     void initialize(int N,
                     int NZ,
                     int *irn,
                     int *jcn,
-                    double *A,
-                    double *RHS);
+                    double *A);
 
     void
-    analysis()
+    factorize()
     {
         id.job = 1;
         dmumps_c(&id);
-    }
-
-    void
-    factorization()
-    {
         id.job = 2;
         dmumps_c(&id);
     }
 
     double *
-    solve()
+    solve(double *RHS)
     {
-        this->start();
-        this->stop();
+        id.rhs = RHS;
+        id.job = 3;
+        dmumps_c(&id);
+
         return id.rhs;
     }
 
+    void
+    finalize() {
+        id.job = JOB_END;
+        dmumps_c(&id);
+    }
 };
 
 

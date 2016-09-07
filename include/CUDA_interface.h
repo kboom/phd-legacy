@@ -1,22 +1,24 @@
+/*
+ * File:   CUDA_interface.h
+ * Author: Krzysztof Kuźnik <kmkuznik at gmail.com>
+ */
+
 #ifndef CUDA_INTERFACE_H
 #define	CUDA_INTERFACE_H
 
 #include <iostream>
 
 template<class T>
-void CUDA_prepare_device(int degree, int n);
+void CUDA_prepare_device(int degree, int n, int rhs_cnt);
 
 template<class T>
-void CUDA_init_fronts(int degree, int n);
+void CUDA_init_fronts(int degree, int n, int rhs_cnt);
 
 template<class T>
-void CUDA_eliminate(int degree, int n);
+void CUDA_factorize_matrix(int degree, int n);
 
 template<class T>
-void CUDA_solve_last_equation(int degree, int n);
-
-template<class T>
-void CUDA_backward_substitution(int degree, int n);
+void CUDA_solve(int degree, int n, int rhs_cnt);
 
 template<class T>
 T CUDA_error(int error, int n);
