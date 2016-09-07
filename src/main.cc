@@ -71,6 +71,7 @@ single_run(int intervals, int rhs_cnt = 1)
     tester.set_rhs_cnt(rhs_cnt);
 
     tester.run_method(intervals, false);
+    print_results(tester.test_method_exponent((degree + 1) * 2, 20000));
 }
 
 int
