@@ -17,7 +17,7 @@ void print_result(const SingleRunTimeResults &srtr, ostream &ostr) {
             % srtr.error;
 }
 
-void print_result_for_Ne(int Ne, const vector<SingleRunTimeResults> &result, ostream &ostr) {
+void print_result_for_Ne(int Ne, const vector<SingleRunTimeResults> &result, ostream &ostr = cout) {
     typedef vector<SingleRunTimeResults>::const_iterator TRit;
 
     ostr << boost::format("%8d\t") % Ne;
@@ -26,7 +26,7 @@ void print_result_for_Ne(int Ne, const vector<SingleRunTimeResults> &result, ost
     }
 }
 
-void find_min_for_Ne(int Ne, const vector<SingleRunTimeResults> &result, ostream &ostr) {
+void find_min_for_Ne(int Ne, const vector<SingleRunTimeResults> &result, ostream &ostr = cout) {
     typedef vector<SingleRunTimeResults>::const_iterator TRit;
 
     ostr << boost::format("%8d\t") % Ne;
@@ -71,7 +71,7 @@ single_run(int element_cnt = 256, int rhs_cnt = 1)
     tester.set_rhs_cnt(rhs_cnt);
 
     tester.run_method(intervals, false);
-    print_results(tester.test_method(element_cnt));
+    print_result_for_Ne(element_cnt, tester.test_method(element_cnt));
 }
 
 int
